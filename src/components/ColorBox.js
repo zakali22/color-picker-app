@@ -1,15 +1,49 @@
 import React, { Component } from 'react'
+import {CopyToClipboard} from "react-copy-to-clipboard"
 
 import "../styles/ColorBox.css"
 
 class ColorBox extends Component {
+   constructor(props){
+      super(props);
+      this.state = {
+         overlayShow: false
+      }
+   }
+
+   showOverlay = () => {
+      this.setState({
+         overlayShow: true
+      })
+
+      this.timer = window.setTimeout(() => {
+         this.setState({
+            overlayShow: false
+         })
+      }, 1500)
+   }
+
+   componentWillUnmount(){
+      this.setState({
+         overlayShow: false
+      })
+
+      window.clearTimeout(this.timer)
+   }
+
    render() {
+      const {color: background, name} = this.props;
       return (
-         <div className="Colorbox" style={{background: this.props.color}}>
-            <span className="Colorbox__name">{this.props.name}</span>
-            <button className="Colorbox__btn Colorbox__copy">Copy</button>
-            <button className="Colorbox__btn Colorbox__more">MORE</button>
-         </div>
+         <CopyToClipboard text={background} onCopy={() => this.showOverlay()}>
+            <div className="Colorbox" style={{background}}>
+               <span className="Colorbox__name">{name}</span>
+               <div className="Colorbox__copy-content">
+                  <div className={`box-overlay ${this.state.overlayShow ? 'box-overlay--show' : 'box-overlay--hide'}`} style={{background}}></div>
+                  <button className="Colorbox__btn Colorbox__copy">Copy</button>
+               </div>
+               <button className="Colorbox__btn Colorbox__more">MORE</button>
+            </div>
+         </CopyToClipboard>
       )
    }
 }
