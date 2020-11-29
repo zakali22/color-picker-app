@@ -3,8 +3,64 @@
     width: 20%;
     max-width: 20%;
     flex: 1 1 20%;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
+.Colorbox__name {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    color: black;
+    z-index: 1;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.Colorbox__btn {
+    border: none;
+    background: rgba(255,255,255, 0.6);
+    color: white;
+    padding: 0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.Colorbox__copy {
+    font-size: 1.5rem;
+    padding: 5px 25px;
+    font-weight: 300;
+    opacity: 0;
+    transition: all .3s ease;
+    transform: scale(.6)
+}
+
+.Colorbox__more {
+    font-size: 1.3rem;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /* transition: transform .1s ease; */
+}
+
+
+.Colorbox:hover .Colorbox__copy {
+    opacity: 1;
+    transform: scale(1)
+}
+
+.Colorbox__more:hover {
+    transform: scale(1.1)
+}
+
+
+/* Media queries */
 
 @media(max-width: 991px){
     .Colorbox {
