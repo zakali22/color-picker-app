@@ -8,3 +8,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+@media(max-width: 991px){
+    .Palette {
+        overflow-y: scroll;
+    }
+}

@@ -6,8 +6,8 @@ import "../styles/Palette.css"
 class Palette extends Component {
 	render() {
 		console.log(this.props)
-		const colorBoxes = this.props.seedsPalette.colors.map(palette => (
-			<ColorBox {...palette} />
+		const colorBoxes = this.props.seedsPalette.colors.map((palette, id) => (
+			<ColorBox {...palette} key={id} />
 		))
 		return (
 			<div className="Palette">

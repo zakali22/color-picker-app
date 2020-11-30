@@ -14,13 +14,13 @@ class ColorBox extends Component {
    showOverlay = () => {
       this.setState({
          overlayShow: true
+      }, () => {
+         this.timer = window.setTimeout(() => {
+            this.setState({
+               overlayShow: false
+            })
+         }, 2000)
       })
-
-      this.timer = window.setTimeout(() => {
-         this.setState({
-            overlayShow: false
-         })
-      }, 1500)
    }
 
    componentWillUnmount(){
@@ -42,6 +42,10 @@ class ColorBox extends Component {
                   <button className="Colorbox__btn Colorbox__copy">Copy</button>
                </div>
                <button className="Colorbox__btn Colorbox__more">MORE</button>
+               <div className={`Colorbox__msg ${this.state.overlayShow && 'Colorbox__msg--show'}`} style={{background}}>
+                  <p className="Colorbox__btn">Copied</p>
+                  <span>{background}</span>
+               </div>
             </div>
          </CopyToClipboard>
       )

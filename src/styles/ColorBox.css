@@ -53,6 +53,43 @@
     position: relative;
 }
 
+.Colorbox__msg {
+    position: fixed; /* Setting it to fixed will take it out of the whole layout */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    justify-content: center;
+    display: none;
+    opacity: 0;
+}
+
+.Colorbox__msg--show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: zoomInAnim 1s ease-in-out forwards;
+    animation-delay: .6s;
+}
+
+.Colorbox__msg .Colorbox__btn {
+    width: 100%;
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 2px black; /* Adds a shadow on the individual letter */
+}
+
+.Colorbox__msg span {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
 .box-overlay {
     width: 100%;
     height: 100%;
@@ -62,7 +99,7 @@
     left: 0;
     z-index: 2;
     transform: scale(0.5);
-    transition: opacity .1s ease-in, transform .9s ease-in;
+    transition: opacity .1s ease-in, transform .4s ease-in;
     height: 100%;
     opacity: 0;
 }
@@ -88,6 +125,24 @@
 }
 
 
+/* Keyframes */
+@keyframes zoomInAnim {
+    0% {
+        opacity: 1;
+        transform: scale(0)
+    }
+
+    50% {
+        transform: scale(1.4)     
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+
 /* Media queries */
 
 @media(max-width: 991px){
@@ -103,6 +158,14 @@
         width: 50%;
         max-width: 50%;
         flex: 1 1 50%;
+    }
+
+    .Colorbox__msg .Colorbox__btn {
+        font-size: 2.6rem;
+    }
+    
+    .Colorbox__msg span {
+        font-size: 2rem;
     }
 }
 
