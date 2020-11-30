@@ -32,7 +32,7 @@ class ColorBox extends Component {
    }
 
    render() {
-      const {color: background, name} = this.props;
+      const {hex: background, name} = this.props;
       return (
          <CopyToClipboard text={background} onCopy={() => this.showOverlay()}>
             <div className="Colorbox" style={{background}}>
