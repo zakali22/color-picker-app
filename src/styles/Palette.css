@@ -15,16 +15,41 @@
     padding: 20px;
 }
 
+.Palette__logo {
+    flex: 1 0 auto;
+}
+
 .Palette__nav-slider {
     display: flex;
     align-items: center;
     margin-left: 50px;
     width: 100%;
-    max-width: 500px;
+    flex: 1 0 auto;
 }
 
 .Palette__slider {
     margin-left: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+@media(max-width: 600px){
+    .Palette__nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .Palette__logo {
+        margin: 5px 0;
+    }
+    .Palette__nav-slider {
+        margin-left: 0;
+    }
+}
+
+@media(max-width: 850px){
+    .Palette__slider {
+        max-width: 300px;
+    }
 }
 
 @media(max-width: 991px){

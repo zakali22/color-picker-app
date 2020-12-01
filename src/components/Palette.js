@@ -7,7 +7,7 @@ import "../styles/Palette.css"
 
 class Palette extends Component {
 	state = {
-		levels: 100
+		levels: 500
 	}
 
 	handleChange = (value) => {
@@ -24,7 +24,7 @@ class Palette extends Component {
 		return (
 			<div className="Palette">
 				<div className="Palette__nav">
-					<h3>Color Picker</h3>
+					<h3 className="Palette__logo">Color Picker</h3>
 					<div className="Palette__nav-slider">
 						<p>Levels: {this.state.levels}</p>
 						<Slider className="Palette__slider" step={100} min={100} max={900} onAfterChange={(v) => this.handleChange(v)} defaultValue={this.state.levels} />
