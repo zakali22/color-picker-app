@@ -1,0 +1,179 @@
+.Colorbox {
+    height: 25%;
+    width: 20%;
+    max-width: 20%;
+    flex: 1 1 20%;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Colorbox__name {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    color: black;
+    z-index: 1;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.Colorbox__btn {
+    border: none;
+    background: rgba(255,255,255, 0.6);
+    color: white;
+    padding: 0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.Colorbox__copy {
+    font-size: 1.5rem;
+    padding: 5px 25px;
+    font-weight: 300;
+    opacity: 0;
+    transition: all .3s ease;
+    transform: scale(.6)
+}
+
+.Colorbox__more {
+    font-size: 1.3rem;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /* transition: transform .1s ease; */
+}
+
+.Colorbox__copy-content {
+    position: relative;
+}
+
+.Colorbox__msg {
+    position: fixed; /* Setting it to fixed will take it out of the whole layout */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    justify-content: center;
+    display: none;
+    opacity: 0;
+}
+
+.Colorbox__msg--show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: zoomInAnim 1s ease-in-out forwards;
+    animation-delay: .6s;
+}
+
+.Colorbox__msg .Colorbox__btn {
+    width: 100%;
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 2px black; /* Adds a shadow on the individual letter */
+}
+
+.Colorbox__msg span {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.box-overlay {
+    width: 100%;
+    height: 100%;
+    background: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    transform: scale(0.5);
+    transition: opacity .1s ease-in, transform .4s ease-in;
+    height: 100%;
+    opacity: 0;
+}
+
+.box-overlay.box-overlay--show {
+    transform: scale(100);
+    opacity: 1;
+}
+
+.box-overlay.box-overlay--hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+.Colorbox:hover .Colorbox__copy {
+    opacity: 1;
+    transform: scale(1)
+}
+
+.Colorbox__more:hover {
+    transform: scale(1.1)
+}
+
+
+/* Keyframes */
+@keyframes zoomInAnim {
+    0% {
+        opacity: 1;
+        transform: scale(0)
+    }
+
+    50% {
+        transform: scale(1.4)     
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+
+/* Media queries */
+
+@media(max-width: 991px){
+    .Colorbox {
+        width: 33.33%;
+        max-width: 33.33%;
+        flex: 1 1 33.33%;
+    } 
+}
+
+@media(max-width: 767px){
+    .Colorbox {
+        width: 50%;
+        max-width: 50%;
+        flex: 1 1 50%;
+    }
+
+    .Colorbox__msg .Colorbox__btn {
+        font-size: 2.6rem;
+    }
+    
+    .Colorbox__msg span {
+        font-size: 2rem;
+    }
+}
+
+@media(max-width: 500px){
+    .Colorbox {
+        width: 100%;
+        max-width: 100%;
+        flex: 1 1 100%;
+        height: 80px;
+    }
+}
