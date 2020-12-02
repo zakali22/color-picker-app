@@ -1,12 +1,15 @@
 .Palette {
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column; /* Solution to keep page in proportion to content */
 }
 
 .Palette__colors {
-    height: calc(100vh - 50px);
+    height: calc(100vh - 74px);
     display: flex;
     flex-wrap: wrap;
+    padding-top: 74px;
 }
 
 .Palette__nav {
@@ -14,6 +17,13 @@
     align-items: center;
     padding: 20px;
     justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    width: 100%;
+    z-index: 5;
+    height: 74px;
 }
 
 .Palette__logo {
@@ -39,11 +49,24 @@
     margin-left: 10px;
 }
 
+.Palette__footer {
+    font-weight: 700;
+    background: white;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+
 @media(max-width: 600px){
     .Palette__nav {
         flex-direction: column;
         align-items: flex-start;
+        height: auto;
     }
+    .Palette__colors {
+        height: calc(100vh - 154.875px);
+        padding-top: 154.875px;
+    }    
     .Palette__logo {
         margin: 5px 0;
     }
