@@ -13,24 +13,30 @@
     display: flex;
     align-items: center;
     padding: 20px;
+    justify-content: flex-start;
 }
 
 .Palette__logo {
-    flex: 1 0 auto;
+    flex: 0 0 auto;
 }
 
 .Palette__nav-slider {
     display: flex;
     align-items: center;
     margin-left: 50px;
-    width: 100%;
     flex: 1 0 auto;
+    margin-right: auto;
 }
 
 .Palette__slider {
     margin-left: 20px;
     width: 100%;
     max-width: 500px;
+}
+
+.Palette__format {
+    flex: 0 0 auto;
+    margin-left: 10px;
 }
 
 @media(max-width: 600px){
@@ -43,6 +49,10 @@
     }
     .Palette__nav-slider {
         margin-left: 0;
+        width: 100%;
+    }
+    .Palette__format {
+        margin-left: 0
     }
 }
 
@@ -55,5 +65,8 @@
 @media(max-width: 991px){
     .Palette {
         overflow-y: scroll;
+    }
+    .Palette__slider {
+        max-width: 350px;
     }
 }
