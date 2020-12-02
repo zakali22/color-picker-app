@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import ColorBox from "./ColorBox"
 import Slider from "rc-slider"
+import MenuItem from "@material-ui/core/MenuItem"
+import Select from "@material-ui/core/Select"
 
 import 'rc-slider/assets/index.css';
 import "../styles/Palette.css"
 
 class Palette extends Component {
 	state = {
-		levels: 500
+		levels: 500,
+		format: 'hex'
 	}
 
 	handleChange = (value) => {
@@ -16,10 +19,16 @@ class Palette extends Component {
 		})
 	}
 
+	handleSelectChange = (e) => {
+		this.setState({
+			format: e.target.value
+		})
+	}
+
 	render() {
-		console.log(this.props)
+		const {format} = this.state;
 		const colorBoxes = this.props.palette.colors[this.state.levels].map((color, id) => (
-			<ColorBox {...color} key={id} />
+			<ColorBox {...color} key={id} format={format} />
 		))
 		return (
 			<div className="Palette">
@@ -28,6 +37,13 @@ class Palette extends Component {
 					<div className="Palette__nav-slider">
 						<p>Levels: {this.state.levels}</p>
 						<Slider className="Palette__slider" step={100} min={100} max={900} onAfterChange={(v) => this.handleChange(v)} defaultValue={this.state.levels} />
+					</div>
+					<div className="Palette__format">
+						<Select onChange={this.handleSelectChange} value={format}>
+							<MenuItem value="hex">HEX - #ffffff</MenuItem>
+							<MenuItem value="rgb">RGB - rgb(255, 255, 255)</MenuItem>
+							<MenuItem value="rgba">RGBA - rgba(255, 255, 255, 1.0)</MenuItem>
+						</Select>
 					</div>
 				</div>
 				<div className="Palette__colors">
