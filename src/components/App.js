@@ -6,7 +6,7 @@ import {generatePalette} from "../generatePalette"
 function App() {
   return (
     <div className="App">
-      <Palette palette={generatePalette(seedsPalette[3])} />
+      <Palette palette={generatePalette(seedsPalette[4])} />
     </div>
   );
 }
