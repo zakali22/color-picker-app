@@ -81,7 +81,7 @@ class Palette extends Component {
 					{colorBoxes}
 				</div>
 				<div className="Palette__footer">
-					<p>Flat UI Dutch Colors {this.props.palette.emoji} </p>
+					<p>{this.props.palette.paletteName} {this.props.palette.emoji} </p>
 				</div>
 			</div>
 		)
