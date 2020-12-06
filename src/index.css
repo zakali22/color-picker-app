@@ -15,3 +15,46 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
 }
+
+.App {
+  height: 100%;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 55%;
+  margin: 0 auto;
+}
+
+a, a:link, a:visited {
+  color: inherit;
+}
+
+a:hover, a:focus {
+  color: inherit;
+}
+
+@media(max-width: 1330px){
+  .container {
+    max-width: 65%;
+  }
+}
+
+@media(max-width: 1110px){
+  .container {
+    max-width: 75%;
+  }
+}
+
+@media(max-width: 991px){
+  .container {
+    max-width: 85%;
+  }
+}
+
+@media(max-width: 767px){
+  .container {
+    max-width: 95%;
+  }
+}
