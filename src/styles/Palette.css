@@ -5,6 +5,10 @@
     flex-direction: column; /* Solution to keep page in proportion to content */
 }
 
+.Palette--single .Palette__nav {
+    justify-content: space-between;
+}
+
 .Palette__colors {
     height: calc(100vh - 74px);
     display: flex;
