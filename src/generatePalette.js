@@ -11,6 +11,8 @@ function generatePalette(starterPalette) {
   for (let level of levels) {
     newPalette.colors[level] = [];
   }
+
+  // console.log(starterPalette.colors)
   for (let color of starterPalette.colors) {
     let scale = getScale(color.color, 10).reverse();
     for (let i in scale) {
@@ -28,6 +30,37 @@ function generatePalette(starterPalette) {
   }
   return newPalette;
 }
+
+function generateSinglePalette(starterPalette) {
+  let newPalette = {
+    paletteName: starterPalette.paletteName,
+    id: starterPalette.id,
+    emoji: starterPalette.emoji,
+    colors: {}
+  };
+  for (let level of levels) {
+    newPalette.colors[level] = {};
+  }
+ 
+  let scale = getScale(starterPalette.colors.color, 10).reverse();
+  for (let i in scale) {
+    newPalette.colors[levels[i]] = {
+      name: `${starterPalette.colors.name} ${levels[i]}`,
+      id: starterPalette.colors.name.toLowerCase().replace(/ /g, "-"),
+      hex: scale[i],
+      rgb: chroma(scale[i]).css(),
+      rgba: chroma(scale[i])
+        .css()
+        .replace("rgb", "rgba")
+        .replace(")", ",1.0)")
+    }
+  }
+
+  console.log(newPalette)
+  return newPalette;
+}
+
+
 function getRange(hexColor) {
   const end = "#fff";
   return [
@@ -46,4 +79,4 @@ function getScale(hexColor, numberOfColors) {
     .colors(numberOfColors);
 }
 
-export { generatePalette };
+export { generatePalette, generateSinglePalette };
