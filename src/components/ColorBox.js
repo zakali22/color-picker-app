@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {CopyToClipboard} from "react-copy-to-clipboard"
+import {Link, withRouter} from "react-router-dom"
 
 import "../styles/ColorBox.css"
 
@@ -32,16 +33,16 @@ class ColorBox extends Component {
    }
 
    render() {
-      const {format, name} = this.props;
+      const {format, name, type} = this.props;
       return (
          <CopyToClipboard text={this.props[format]} onCopy={() => this.showOverlay()}>
-            <div className="Colorbox" style={{background: this.props[format]}}>
+            <div className={`Colorbox ${type === 'single' && 'Colorbox--single'}`} style={{background: this.props[format]}}>
                <span className="Colorbox__name">{name}</span>
                <div className="Colorbox__copy-content">
                   <div className={`box-overlay ${this.state.overlayShow ? 'box-overlay--show' : 'box-overlay--hide'}`} style={{background: this.props[format]}}></div>
                   <button className="Colorbox__btn Colorbox__copy">Copy</button>
                </div>
-               <button className="Colorbox__btn Colorbox__more">MORE</button>
+               {type !== 'single' && <Link to={`${this.props.location.pathname}/${this.props.id}`} className="Colorbox__btn Colorbox__more">MORE</Link>}
                <div className={`Colorbox__msg ${this.state.overlayShow && 'Colorbox__msg--show'}`} style={{background: this.props[format]}}>
                   <p className="Colorbox__btn">Copied</p>
                   <span>{this.props[format]}</span>
@@ -52,4 +53,4 @@ class ColorBox extends Component {
    }
 }
 
-export default ColorBox
+export default withRouter(ColorBox)
