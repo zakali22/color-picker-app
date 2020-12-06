@@ -5,21 +5,24 @@ const styles = {
 	root: {
 		backgroundColor: 'white',
 		borderRadius: '10px',
-		height: "100%",
+		height: "auto",
 		padding: "10px",
 		display: "flex",
-    flexDirection: "column"
+    	flexDirection: "column"
 	},
 	colors: {
-		height: "100%",
+		height: "200px",
 		width: "100%",
 		display: "flex",
-		flexWrap: "wrap"
+		flexWrap: "wrap",
+		"@media(max-width: 814px)": {
+			height: "150px"
+		}
 	},
 	color: {
-    width: "25%",
-    height: "100%",
-    maxHeight: "20%"
+		width: "25%",
+		height: "100%",
+		maxHeight: "20%"
 	},
 	description: {
 		background: "white",
@@ -28,7 +31,10 @@ const styles = {
 		alignItems: "center",
 		"& p": {
 			fontWeight: 700,
-			color: "black"
+			color: "black",
+			"@media(max-width: 806px)": {
+				fontSize: "1.4rem"
+			}
 		}
 	}
 }
