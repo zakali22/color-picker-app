@@ -16,6 +16,10 @@
 }
 
 
+.light-text {
+    color: white !important;
+}
+
 .Colorbox--nav {
     background: black;
     color: white;
