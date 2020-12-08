@@ -29,8 +29,10 @@ function App() {
     };
     
     newPaletteColor.colors = newPaletteColor.colors.find((color) => {
-      return color.name === colorId 
+      return color.name.toLowerCase() === colorId 
     })
+
+    console.log(newPaletteColor)
 
     return newPaletteColor
   }
