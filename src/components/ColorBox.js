@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {CopyToClipboard} from "react-copy-to-clipboard"
 import {Link, withRouter} from "react-router-dom"
+import {withStyles} from "@material-ui/styles"
 import chroma from "chroma-js"
-
-import "../styles/ColorBox.css"
+import styles from "../styles/ColorBox.js"
 
 class ColorBox extends Component {
    constructor(props){
@@ -34,21 +34,21 @@ class ColorBox extends Component {
    }
 
    render() {
-      const {format, name, type} = this.props;
+      const {format, name, type, classes} = this.props;
       const isDark = chroma(this.props[format]).luminance() <= 0.5
 
       return (
          <CopyToClipboard text={this.props[format]} onCopy={() => this.showOverlay()}>
-            <div className={`Colorbox ${type === 'single' && 'Colorbox--single'}`} style={{background: this.props[format]}}>
-               <span className={`Colorbox__name ${isDark && 'light-text'}`}>{name}</span>
-               <div className="Colorbox__copy-content">
-                  <div className={`box-overlay ${this.state.overlayShow ? 'box-overlay--show' : 'box-overlay--hide'}`} style={{background: this.props[format]}}></div>
-                  <button className="Colorbox__btn Colorbox__copy">Copy</button>
+            <div className={`${classes.root} ${classes.boxColor}`}>
+               <span className={classes.colorName}>{name}</span>
+               <div className={classes.copyContent}>
+                  <div className={`${classes.boxOverlay} ${this.state.overlayShow ? classes.showBoxOverlay : classes.hideBoxOverlay} ${classes.boxColor}`}></div>
+                  <button className={`${classes.boxBtn} ${classes.boxBtnCopy}`}>Copy</button>
                </div>
-               {type !== 'single' && <Link to={`${this.props.location.pathname}/${this.props.id}`} className={`Colorbox__btn Colorbox__more ${isDark && 'light-text'}`}>MORE</Link>}
-               <div className={`Colorbox__msg ${this.state.overlayShow && 'Colorbox__msg--show'}`} style={{background: this.props[format]}}>
-                  <p className="Colorbox__btn">Copied</p>
-                  <span>{this.props[format]}</span>
+               {type !== 'single' && <Link to={`${this.props.location.pathname}/${this.props.id}`} className={`${classes.boxBtn} ${classes.boxBtnMore} ${classes.textColor}`}>MORE</Link>}
+               <div className={`${classes.messageBox} ${this.state.overlayShow && classes.showMessageBox} ${classes.boxColor}`}>
+                  <p className={`${classes.boxBtn} ${classes.boxBtnCopy}`}>Copied</p>
+                  <span className={classes.textColor}>{this.props[format]}</span>
                </div>
             </div>
          </CopyToClipboard>
@@ -56,4 +56,6 @@ class ColorBox extends Component {
    }
 }
 
-export default withRouter(ColorBox)
+const compWithStyles = withStyles(styles)(ColorBox)
+
+export default withRouter(compWithStyles)
