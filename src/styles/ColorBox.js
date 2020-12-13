@@ -14,6 +14,22 @@ export default {
         "&:hover $boxBtnCopy": {
             opacity: 1,
             transform: "scale(1)"
+        },
+        "@media(max-width: 991px)": {
+            width: "33.33%",
+            maxWidth: "33.33%",
+            flex: "1 1 33.33%"
+        },
+        "@media(max-width: 767px)": {
+            width: "50%",
+            maxWidth: "50%",
+            flex: "1 1 50%"
+        },
+        "@media(max-width: 500px)": {
+            width: "100%",
+            maxWidth: "100%",
+            flex: "1 1 100%",
+            height: "80px"
         }
     },
     colorName: {
@@ -100,11 +116,17 @@ export default {
             fontSize: "4rem",
             marginBottom: "15px",
             textShadow: "1px 2px black",
-            opacity: 1
+            opacity: 1,
+            "@media(max-width: 767px)": {
+                fontSize: "2.6rem"
+            }
         },
         "& span": {
             fontSize: "2rem",
-            fontWeight: 300
+            fontWeight: 300,
+            "@media(max-width: 767px)": {
+                fontSize: "2rem"
+            }
         }
     },
     showMessageBox: {
