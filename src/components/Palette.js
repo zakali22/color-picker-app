@@ -6,9 +6,11 @@ import Select from "@material-ui/core/Select"
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from "@material-ui/icons/Close"
+import {withStyles} from "@material-ui/styles"
 
 import 'rc-slider/assets/index.css';
-import "../styles/Palette.css"
+// import "../styles/Palette.css";
+import styles from "../styles/Palette.js"
 
 class Palette extends Component {
 	state = {
@@ -38,19 +40,20 @@ class Palette extends Component {
 	}
 
 	render() {
+		const {classes} = this.props;
 		const {format} = this.state;
 		const colorBoxes = this.props.palette.colors[this.state.levels].map((color, id) => (
 			<ColorBox {...color} key={id} format={format} />
 		))
 		return (
-			<div className="Palette">
-				<div className="Palette__nav">
-					<h3 className="Palette__logo">Color Picker</h3>
-					<div className="Palette__nav-slider">
+			<div className={classes.root}>
+				<div className={classes.nav}>
+					<h3 className={classes.navLogo}>Color Picker</h3>
+					<div className={classes.navSliderWrapper}>
 						<p>Levels: {this.state.levels}</p>
-						<Slider className="Palette__slider" step={100} min={100} max={900} onAfterChange={(v) => this.handleChange(v)} defaultValue={this.state.levels} />
+						<Slider className={classes.navSlider} step={100} min={100} max={900} onAfterChange={(v) => this.handleChange(v)} defaultValue={this.state.levels} />
 					</div>
-					<div className="Palette__format">
+					<div className={classes.navFormat}>
 						<Select onChange={this.handleSelectChange} value={format}>
 							<MenuItem value="hex">HEX - #ffffff</MenuItem>
 							<MenuItem value="rgb">RGB - rgb(255, 255, 255)</MenuItem>
@@ -77,10 +80,10 @@ class Palette extends Component {
 						]}
 					/>
 				</div>
-				<div className="Palette__colors">
+				<div className={classes.colors}>
 					{colorBoxes}
 				</div>
-				<div className="Palette__footer">
+				<div className={classes.footer}>
 					<p>{this.props.palette.paletteName} {this.props.palette.emoji} </p>
 				</div>
 			</div>
@@ -88,4 +91,4 @@ class Palette extends Component {
 	}
 }
 
-export default Palette
+export default withStyles(styles)(Palette)

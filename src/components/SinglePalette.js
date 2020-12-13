@@ -7,6 +7,9 @@ import CloseIcon from "@material-ui/icons/Close"
 import {withRouter} from "react-router-dom"
 
 import ColorBox from "./ColorBox"
+import BackButton from "./BackButton"
+import styles from "../styles/Palette.js"
+import {withStyles} from "@material-ui/styles"
 
 class SinglePalette extends Component {
     state = {
@@ -36,17 +39,17 @@ class SinglePalette extends Component {
     }
 
     render() {
-        const {palettes: {colors}} = this.props;
+        const {palettes: {colors}, classes} = this.props;
         console.log(colors)
         const {format} = this.state;
         const colorBoxes = Object.keys(colors).map((color, id) => (
           <ColorBox {...colors[color]} key={id} format={format} type="single" />
         ))
         return (
-          <div className="Palette Palette--single">
-            <div className="Palette__nav">
-              <h3 className="Palette__logo">Color Picker</h3>
-              <div className="Palette__format">
+          <div className={`${classes.root} ${classes.singlePalette}`}>
+            <div className={classes.nav}>
+              <h3 className={classes.navLogo}>Color Picker</h3>
+              <div className={classes.navFormat}>
                 <Select onChange={this.handleSelectChange} value={format}>
                   <MenuItem value="hex">HEX - #ffffff</MenuItem>
                   <MenuItem value="rgb">RGB - rgb(255, 255, 255)</MenuItem>
@@ -73,15 +76,13 @@ class SinglePalette extends Component {
                 ]}
               />
             </div>
-            <div className="Palette__colors">
+            <div className={classes.colors}>
               {colorBoxes}
-              <div className="Colorbox Colorbox--single Colorbox--nav" onClick={() => this.props.history.goBack()}>
-                <div className="Colorbox__btn">Go back</div>
-              </div>
+              <BackButton type="single"/>
             </div>
           </div>
         )
     }
 }
 
-export default withRouter(SinglePalette)
+export default withStyles(styles)(SinglePalette)
