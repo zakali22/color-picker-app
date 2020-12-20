@@ -3,6 +3,7 @@ import seedsPalette from "../seedPalettes"
 import Palette from "./Palette"
 import PaletteList from "./PalettesList"
 import SinglePalette from "./SinglePalette"
+import PaletteDrawer from "./PaletteDrawer"
 
 import {generatePalette, generateSinglePalette} from "../generatePalette"
 import {Switch, Route} from "react-router-dom"
@@ -41,6 +42,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" render={() => <PaletteList palettes={seedsPalette} />} />
+        <Route exact path="/palette/new" render={() => <PaletteDrawer palettes={seedsPalette} />}/>
         <Route exact path="/palette/:id" render={(routeProps) => {
           console.log(routeProps.match.params.id)
           return <Palette palette={generatePalette(findPalette(routeProps.match.params.id))} />
