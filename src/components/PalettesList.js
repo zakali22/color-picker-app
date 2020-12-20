@@ -12,7 +12,7 @@ class PalettesList extends Component {
 				<div className={`${classes.container} container`}>
 					<div className={classes.header}>
 						<h3>Color Picker</h3>
-						<Link to="/">Create palette</Link>
+						<Link to="/palette/new">Create palette</Link>
 					</div>
 					<div className={classes.listing}>
 						{
