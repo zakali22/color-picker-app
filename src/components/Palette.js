@@ -7,6 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from "@material-ui/icons/Close"
 import {withStyles} from "@material-ui/styles"
+import {Link} from "react-router-dom"
 
 import 'rc-slider/assets/index.css';
 // import "../styles/Palette.css";
@@ -48,7 +49,7 @@ class Palette extends Component {
 		return (
 			<div className={classes.root}>
 				<div className={classes.nav}>
-					<h3 className={classes.navLogo}>Color Picker</h3>
+					<Link to='/'><h3 className={classes.navLogo}>Color Picker</h3></Link>
 					<div className={classes.navSliderWrapper}>
 						<p>Levels: {this.state.levels}</p>
 						<Slider className={classes.navSlider} step={100} min={100} max={900} onAfterChange={(v) => this.handleChange(v)} defaultValue={this.state.levels} />
