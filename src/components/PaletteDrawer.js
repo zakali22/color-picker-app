@@ -14,6 +14,8 @@ import Button from '@material-ui/core/Button';
 import { ChromePicker } from 'react-color'
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import DeleteIcon from "@material-ui/icons/Delete"
+import {Link} from "react-router-dom"
+import seedsPalette from "../seedPalettes"
 
 
 const drawerWidth = 440;
@@ -27,6 +29,22 @@ const styles = (theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: '#fff',
+    color: 'black'
+  },
+  appBarTitle: {
+    marginRight: 'auto'
+  },
+  appBarForm: {
+    display: 'flex'
+  },
+  appBarFormInput: {
+    fontSize: '2rem',
+    marginRight: '2.5rem'
+  },
+  appBarFormButton: {
+    padding: "0 10px",
+    fontSize: "1rem"
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -175,7 +193,8 @@ class PaletteDrawer extends React.Component {
         open: false,
         background: '#952F8A',
         colors: [],
-        colorName: ''
+        colorName: '',
+        paletteName: ''
     }
 
     componentDidMount(){
@@ -206,7 +225,7 @@ class PaletteDrawer extends React.Component {
       if(this.state.colors.length < 20){
         const newColor = {
           color: this.state.background, 
-          colorName: this.state.colorName
+          name: this.state.colorName
         }
         this.setState((state) => ({
             colors: state.colors.concat(newColor),
@@ -215,9 +234,11 @@ class PaletteDrawer extends React.Component {
       }
     }
 
-    handleInputChange = event => {
+    handleInputChange = (event, name) => {
+      console.log(name)
+
       this.setState({
-        colorName: event.target.value
+        [name]: event.target.value
       })
     }
 
@@ -242,7 +263,7 @@ class PaletteDrawer extends React.Component {
       if(this.state.colors.length < 20){
         this.setState((state) => ({
           colors: state.colors.concat({
-            colorName: randomColor.name,
+            name: randomColor.name,
             color: randomColor.color
           })
         }))
@@ -253,12 +274,33 @@ class PaletteDrawer extends React.Component {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    handleAddPaletteName = () => {
+      const newPalette = {
+        paletteName: this.state.paletteName,
+        colors: this.state.colors,
+        emoji: "🎨",
+        id: this.state.paletteName.split(' ').join('-').toLowerCase()
+      }
+
+      let savedSeedsPalette = this.props.palettes
+      let paletteObj = savedSeedsPalette.find(palette => {
+        return palette['paletteName'] === this.state.paletteName
+      })
+
+      if(!paletteObj){
+        savedSeedsPalette.push(newPalette)
+        this.props.savePalette(savedSeedsPalette)
+
+        this.props.history.push('/')
+      }
+    }
+
     render(){
         const {open} = this.state;
         const {classes, theme} = this.props;
         return (
             <div className={classes.root}>
-                <CssBaseline />
+                {/* <CssBaseline /> */}
                 <AppBar
                     position="fixed"
                     className={clsx(classes.appBar, {
@@ -275,9 +317,25 @@ class PaletteDrawer extends React.Component {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h5" noWrap>
-                        Persistent drawer
-                    </Typography>
+                    <Link to='/' className={classes.appBarTitle}><Typography variant="h4"  noWrap>Create your Palette</Typography></Link>
+                    <ValidatorForm
+                            ref="form"
+                            onSubmit={this.handleAddColor}
+                            onError={errors => console.log(errors)}
+                            className={classes.appBarForm}
+                        >
+                          <TextValidator
+                              label="Palette Name"
+                              onChange={e => this.handleInputChange(e, 'paletteName')}
+                              name="paletteName"
+                              value={this.state.paletteName}
+                              className={classes.appBarFormInput}
+                              validators={['required']}
+                              errorMessages={['this field is required']} 
+                          />
+
+                          <Button className={classes.appBarFormButton} variant="contained" color="secondary" onClick={this.handleAddPaletteName}>Add Palette</Button>
+                        </ValidatorForm>
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -312,7 +370,7 @@ class PaletteDrawer extends React.Component {
                         >
                           <TextValidator
                               label="Color Name"
-                              onChange={this.handleInputChange}
+                              onChange={e => this.handleInputChange(e, 'colorName')}
                               name="colorName"
                               value={this.state.colorName}
                               className={classes.formInput}
@@ -335,7 +393,7 @@ class PaletteDrawer extends React.Component {
                         {
                             this.state.colors.map(color => (
                                 <div style={{background: color.color}} className={classes.colorBox}>
-                                    <p className={classes.colorBoxName}>{color.colorName}</p>
+                                    <p className={classes.colorBoxName}>{color.name}</p>
                                     <DeleteIcon onClick={() => this.handleDeleteColor(color)} />
                                 </div>
                             ))

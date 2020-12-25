@@ -7,6 +7,7 @@ import styles from "../styles/PaletteListing.js"
 class PalettesList extends Component {
 	render() {
 		const {classes} = this.props
+		console.log(this.props.palettes)
 		return (
 			<div className={classes.root}>
 				<div className={`${classes.container} container`}>
@@ -16,9 +17,11 @@ class PalettesList extends Component {
 					</div>
 					<div className={classes.listing}>
 						{
-							this.props.palettes.map((palette, id) => (
-								<Link to={`/palette/${palette.id}`} key={id} className={classes.listingItem}><MiniPalette palette={palette} /></Link>
-							))
+							this.props.palettes.length > 0 ? 
+								this.props.palettes.map((palette, id) => (
+									<Link to={`/palette/${palette.id}`} key={id} className={classes.listingItem}><MiniPalette palette={palette} /></Link>
+								))
+							: null
 						}	
 					</div>
 				</div>
