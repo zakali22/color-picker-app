@@ -15,6 +15,7 @@ const styles = {
 		width: "100%",
 		display: "flex",
 		flexWrap: "wrap",
+		alignContent: "flex-start",
 		"@media(max-width: 814px)": {
 			height: "150px"
 		}
