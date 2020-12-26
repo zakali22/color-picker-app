@@ -71,6 +71,7 @@ export default {
         display: "flex",
         flexWrap: "wrap",
         paddingTop: "74px",
+        alignContent: "flex-start",
         "@media(max-width: 600px)": {
             height: "calc(100vh - 154.875px)",
             paddingTop: "154.875px"
