@@ -185,6 +185,13 @@ const styles = (theme) => ({
     "& .MuiInputBase-input": {
       background: "#cccccc"
     }
+  },
+  emptyMessage: {
+    padding: "0 10px", 
+    width: "100%",
+    "& h2": {
+      textAlign: "center"
+    }
   }
 });
 
@@ -257,9 +264,15 @@ class PaletteDrawer extends React.Component {
 
     handleAddRandomColor = () => {
       const {palettes} = this.props;
-      let randomPalette = palettes[this.randomInteger(0, (palettes.length - 1))]
+      let randomPalette, randomColor;
 
-      let randomColor = randomPalette.colors[this.randomInteger(0, randomPalette.colors.length - 1)]
+      if(palettes.length){
+        randomPalette = palettes[this.randomInteger(0, (palettes.length - 1))]
+      } else {
+        randomPalette = seedsPalette[this.randomInteger(0, (palettes.length - 1))]
+      }
+
+      randomColor = randomPalette.colors[this.randomInteger(0, randomPalette.colors.length - 1)]
       if(this.state.colors.length < 20){
         this.setState((state) => ({
           colors: state.colors.concat({
@@ -391,12 +404,17 @@ class PaletteDrawer extends React.Component {
                     <div className={classes.drawerHeader} />
                     <div className={classes.colorBoxesWrapper}>
                         {
+                          this.state.colors.length ? (
                             this.state.colors.map(color => (
                                 <div style={{background: color.color}} className={classes.colorBox}>
                                     <p className={classes.colorBoxName}>{color.name}</p>
                                     <DeleteIcon onClick={() => this.handleDeleteColor(color)} />
                                 </div>
                             ))
+                          ) : 
+                          <div className={classes.emptyMessage}>
+                            <h2>Add colors using the picker in the menu to create a palette</h2>
+                          </div>
                         }
                     </div>
                 </main>
