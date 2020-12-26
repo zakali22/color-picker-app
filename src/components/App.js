@@ -49,8 +49,7 @@ class App extends React.Component {
     })
   }
 
-  handleDeleteColor = (e, palette) => {
-    e.preventDefault();
+  handleDeleteColor = (palette) => {
     const palettes = this.state.seedsPalette.filter(paletteObj => (
       paletteObj.id !== palette.id
     ))
@@ -66,7 +65,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path="/" render={() => <PaletteList palettes={this.state.seedsPalette} handleDeleteColor={(e, palette) => this.handleDeleteColor(e, palette)} />} />
+          <Route exact path="/" render={() => <PaletteList palettes={this.state.seedsPalette} handleDeleteColor={(palette) => this.handleDeleteColor(palette)} />} />
           <Route exact path="/palette/new" render={(routeProps) => <PaletteDrawer palettes={this.state.seedsPalette} {...routeProps} savePalette={(savePalette) => this.savePalette(savePalette)} />}/>
           <Route exact path="/palette/:id" render={(routeProps) => {
             console.log(routeProps.match.params.id)
