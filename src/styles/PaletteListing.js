@@ -1,5 +1,15 @@
 
 export default {
+    "@global": {
+        ".item-exit": {
+            opacity: 1
+        },
+        ".item-exit-active": {
+            opacity: 0,
+            transform: "translateY(-5px)",
+            transition: "all 500ms ease-in"
+        }
+    },
     root: {
         height: "auto",
         minHeight: "100vh",
