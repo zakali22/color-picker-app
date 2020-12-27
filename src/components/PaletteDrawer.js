@@ -273,13 +273,26 @@ class PaletteDrawer extends React.Component {
       }
 
       randomColor = randomPalette.colors[this.randomInteger(0, randomPalette.colors.length - 1)]
-      if(this.state.colors.length < 20){
+      if(this.state.colors.length === 0){
         this.setState((state) => ({
           colors: state.colors.concat({
             name: randomColor.name,
             color: randomColor.color
           })
         }))
+      } else if(this.state.colors.length < 20){
+        let colorExists = this.state.colors.find(color => color.color === randomColor.color)
+
+        if(!colorExists){
+          this.setState((state) => ({
+            colors: state.colors.concat({
+              name: randomColor.name,
+              color: randomColor.color
+            })
+          }))
+        }
+      } else {
+        return 
       }
     }
 
